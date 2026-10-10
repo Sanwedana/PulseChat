@@ -2,7 +2,9 @@ package com.example.pulsechat;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.Network;
 import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
 import android.text.format.DateUtils;
 
 import java.text.SimpleDateFormat;
@@ -48,9 +50,30 @@ public class Utils {
     }
 
     public static boolean isOnline(Context c) {
-        ConnectivityManager cm = (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (cm == null) return false;
-        NetworkCapabilities caps = cm.getNetworkCapabilities(cm.getActiveNetwork());
-        return caps != null && caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
+        if (c == null) return true;
+        try {
+            ConnectivityManager cm = (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);
+            if (cm == null) return true;
+
+            Network activeNetwork = cm.getActiveNetwork();
+            if (activeNetwork != null) {
+                NetworkCapabilities caps = cm.getNetworkCapabilities(activeNetwork);
+                if (caps != null) {
+                    if (caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) ||
+                        caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)) {
+                        return true;
+                    }
+                }
+            }
+
+            @SuppressWarnings("deprecation")
+            NetworkInfo ni = cm.getActiveNetworkInfo();
+            if (ni != null && ni.isConnected()) {
+                return true;
+            }
+        } catch (Exception ignored) {
+            return true;
+        }
+        return false;
     }
 }
