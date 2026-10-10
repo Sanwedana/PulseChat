@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:padding="28dp" android:gravity="center_vertical">
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="Reset password 🔑" android:textColor="@color/text_primary"
+        android:textSize="28sp" android:textStyle="bold" />
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginTop="6dp" android:layout_marginBottom="28dp"
+        android:text="We'll email you a reset link" android:textColor="@color/text_secondary" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:hint="Email" app:boxCornerRadiusTopStart="16dp" app:boxCornerRadiusTopEnd="16dp"
+        app:boxCornerRadiusBottomStart="16dp" app:boxCornerRadiusBottomEnd="16dp">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/etEmail"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton android:id="@+id/btnSend"
+        android:layout_width="match_parent" android:layout_height="56dp"
+        android:layout_marginTop="22dp" android:text="Send reset link" app:cornerRadius="28dp" />
+
+    <TextView android:id="@+id/tvBack" android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:layout_gravity="center"
+        android:layout_marginTop="22dp" android:padding="8dp"
+        android:text="Back to login" android:textColor="@color/violet" />
+</LinearLayout>

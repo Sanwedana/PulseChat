@@ -1,0 +1,11 @@
+<resources>
+    <style name="Theme.PulseChat" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/violet</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/lavender</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="android:windowBackground">@color/bg</item>
+        <item name="android:statusBarColor">@color/bg</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>

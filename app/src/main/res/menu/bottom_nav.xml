@@ -1,0 +1,5 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_chats" android:icon="@drawable/ic_chat" android:title="Chats" />
+    <item android:id="@+id/nav_people" android:icon="@drawable/ic_people" android:title="People" />
+    <item android:id="@+id/nav_profile" android:icon="@drawable/ic_person" android:title="Profile" />
+</menu>

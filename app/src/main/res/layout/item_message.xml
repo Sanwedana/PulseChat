@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="vertical" android:paddingHorizontal="12dp" android:paddingVertical="3dp">
+
+    <TextView android:id="@+id/tvDate" android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="10dp" android:background="@drawable/bg_input"
+        android:paddingHorizontal="12dp" android:paddingVertical="4dp"
+        android:textColor="@color/text_secondary" android:textSize="12sp"
+        android:visibility="gone" />
+
+    <LinearLayout android:id="@+id/bubble" android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:orientation="vertical"
+        android:paddingHorizontal="14dp" android:paddingVertical="8dp">
+        <TextView android:id="@+id/tvText" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:maxWidth="280dp"
+            android:textSize="15sp" />
+        <TextView android:id="@+id/tvTime" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_gravity="end"
+            android:layout_marginTop="2dp" android:textSize="10sp" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="64dp"
+        android:background="@color/white" android:elevation="4dp"
+        android:gravity="center_vertical" android:orientation="horizontal"
+        android:paddingHorizontal="8dp">
+        <ImageButton android:id="@+id/btnBack" android:layout_width="48dp"
+            android:layout_height="48dp" android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Back" android:src="@drawable/ic_back"
+            app:tint="@color/text_primary" />
+        <TextView android:id="@+id/tvAvatar" android:layout_width="40dp"
+            android:layout_height="40dp" android:background="@drawable/bg_avatar"
+            android:gravity="center" android:textColor="@color/white"
+            android:textSize="16sp" android:textStyle="bold" />
+        <TextView android:id="@+id/tvName" android:layout_width="0dp"
+            android:layout_height="wrap_content" android:layout_weight="1"
+            android:layout_marginStart="12dp" android:textColor="@color/text_primary"
+            android:textSize="18sp" android:textStyle="bold" android:maxLines="1" />
+    </LinearLayout>
+
+    <TextView android:id="@+id/tvBanner" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:background="@color/lavender_mid"
+        android:gravity="center" android:padding="6dp" android:visibility="gone"
+        android:text="You're offline. Messages will send when you reconnect."
+        android:textColor="@color/text_primary" android:textSize="12sp" />
+
+    <FrameLayout android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1">
+        <androidx.recyclerview.widget.RecyclerView android:id="@+id/rv"
+            android:layout_width="match_parent" android:layout_height="match_parent"
+            android:clipToPadding="false" android:paddingVertical="8dp" />
+        <ProgressBar android:id="@+id/progress" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_gravity="center" />
+        <TextView android:id="@+id/tvEmpty" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_gravity="center"
+            android:gravity="center" android:padding="32dp" android:visibility="gone"
+            android:text="No messages yet 👋\nSay hello!" android:textColor="@color/text_secondary"
+            android:textSize="16sp" />
+    </FrameLayout>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:background="@color/white" android:gravity="center_vertical"
+        android:orientation="horizontal" android:padding="10dp">
+        <EditText android:id="@+id/etMessage" android:layout_width="0dp"
+            android:layout_height="wrap_content" android:layout_weight="1"
+            android:background="@drawable/bg_input" android:hint="Type a message"
+            android:inputType="textCapSentences|textMultiLine" android:maxLines="4"
+            android:minHeight="48dp" android:paddingHorizontal="18dp"
+            android:textColor="@color/text_primary" android:textColorHint="@color/text_secondary" />
+        <ImageButton android:id="@+id/btnSend" android:layout_width="48dp"
+            android:layout_height="48dp" android:layout_marginStart="8dp"
+            android:background="@drawable/bg_avatar" android:contentDescription="Send"
+            android:src="@drawable/ic_send" app:tint="@color/white" />
+    </LinearLayout>
+</LinearLayout>
