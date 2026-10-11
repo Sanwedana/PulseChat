@@ -1,0 +1,16 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="360dp" android:height="640dp"
+    android:viewportWidth="360" android:viewportHeight="640">
+    <group android:rotation="25" android:pivotX="60" android:pivotY="90">
+        <path android:fillColor="#33FF9EC1" android:pathData="M40,90 C50,70 80,70 90,90 C80,110 50,110 40,90z" />
+    </group>
+    <group android:rotation="-30" android:pivotX="300" android:pivotY="200">
+        <path android:fillColor="#40FFB3CF" android:pathData="M280,200 C290,180 320,180 330,200 C320,220 290,220 280,200z" />
+    </group>
+    <group android:rotation="50" android:pivotX="80" android:pivotY="420">
+        <path android:fillColor="#33FF9EC1" android:pathData="M60,420 C70,400 100,400 110,420 C100,440 70,440 60,420z" />
+    </group>
+    <group android:rotation="-15" android:pivotX="290" android:pivotY="540">
+        <path android:fillColor="#40FFB3CF" android:pathData="M270,540 C280,520 310,520 320,540 C310,560 280,560 270,540z" />
+    </group>
+</vector>

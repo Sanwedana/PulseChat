@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical" android:paddingTop="16dp">
+    android:background="@drawable/bg_petals" android:orientation="vertical">
 
     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:paddingHorizontal="20dp" android:text="Find people"
-        android:textColor="@color/text_primary" android:textSize="26sp" android:textStyle="bold" />
+        android:layout_margin="12dp" android:background="@drawable/bg_header_pill"
+        android:padding="16dp" android:text="Find people 🌷"
+        android:textColor="@color/violet_dark" android:textSize="22sp" android:textStyle="bold" />
 
     <EditText android:id="@+id/etSearch" android:layout_width="match_parent"
-        android:layout_height="48dp" android:layout_margin="16dp"
-        android:background="@drawable/bg_input" android:hint="Search by name"
-        android:inputType="text" android:paddingHorizontal="18dp"
+        android:layout_height="48dp" android:layout_marginHorizontal="16dp"
+        android:background="@drawable/bg_input" android:drawableStart="@drawable/ic_search"
+        android:drawableTint="@color/violet" android:drawablePadding="10dp"
+        android:hint="Search by name" android:inputType="text" android:paddingHorizontal="16dp"
         android:textColor="@color/text_primary" android:textColorHint="@color/text_secondary" />
 
     <FrameLayout android:layout_width="match_parent" android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_marginTop="8dp" android:layout_weight="1">
         <androidx.recyclerview.widget.RecyclerView android:id="@+id/rv"
             android:layout_width="match_parent" android:layout_height="match_parent" />
         <ProgressBar android:id="@+id/progress" android:layout_width="wrap_content"
@@ -23,6 +25,6 @@
         <TextView android:id="@+id/tvEmpty" android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:layout_gravity="center"
             android:padding="32dp" android:gravity="center" android:visibility="gone"
-            android:text="No users found" android:textColor="@color/text_secondary" />
+            android:text="No users found 🍃" android:textColor="@color/text_secondary" />
     </FrameLayout>
 </LinearLayout>

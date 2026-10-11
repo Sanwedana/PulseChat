@@ -51,12 +51,20 @@ public class ChatsFragment extends Fragment {
         myUid = me.getUid();
 
         String name = me.getDisplayName();
-        b.tvGreeting.setText("Hi, " + (name == null || name.isEmpty() ? "there" : name.split(" ")[0]) + " 👋");
+        String first = (name == null || name.trim().isEmpty()) ? "there" : name.trim().split(" ")[0];
+        b.tvGreeting.setText("Hello, " + first + " 🌸");
+
+        FirebaseFirestore.getInstance().collection("users").document(myUid).get()
+                .addOnSuccessListener(d -> {
+                    Long a = d.getLong("avatarId");
+                    if (b != null && a != null) b.ivMe.setImageResource(Utils.avatarRes(a.intValue()));
+                });
 
         adapter = new ChatListAdapter(chat -> {
             Intent i = new Intent(requireContext(), ChatActivity.class);
             i.putExtra("otherUid", chat.otherUid);
             i.putExtra("otherName", chat.otherName);
+            i.putExtra("otherAvatar", chat.otherAvatar);
             startActivity(i);
         });
         b.rv.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -86,27 +94,28 @@ public class ChatsFragment extends Fragment {
                         return;
                     }
                     all.clear();
-                    if (snap != null) {
-                        for (DocumentSnapshot d : snap.getDocuments()) {
-                            String last = d.getString("lastMessage");
-                            if (last == null || last.isEmpty()) continue;
+                    for (DocumentSnapshot d : snap.getDocuments()) {
+                        String last = d.getString("lastMessage");
+                        if (last == null || last.isEmpty()) continue;
 
-                            List<String> parts = (List<String>) d.get("participants");
-                            if (parts == null) continue;
-                            String other = parts.get(0).equals(myUid) ? parts.get(1) : parts.get(0);
+                        List<String> parts = (List<String>) d.get("participants");
+                        if (parts == null || parts.size() != 2) continue;
+                        String other = parts.get(0).equals(myUid) ? parts.get(1) : parts.get(0);
 
-                            ChatItem c = new ChatItem();
-                            c.chatId = d.getId();
-                            c.otherUid = other;
-                            Map<String, String> names = (Map<String, String>) d.get("names");
-                            c.otherName = names != null && names.get(other) != null ? names.get(other) : "User";
-                            c.lastMessage = last;
-                            c.lastTime = d.getDate("lastMessageTime",
-                                    DocumentSnapshot.ServerTimestampBehavior.ESTIMATE);
-                            Map<String, Long> unread = (Map<String, Long>) d.get("unread");
-                            c.unread = unread != null && unread.get(myUid) != null ? unread.get(myUid) : 0;
-                            all.add(c);
-                        }
+                        ChatItem c = new ChatItem();
+                        c.chatId = d.getId();
+                        c.otherUid = other;
+                        Map<String, String> names = (Map<String, String>) d.get("names");
+                        c.otherName = names != null && names.get(other) != null ? names.get(other) : "User";
+                        Map<String, Long> avatars = (Map<String, Long>) d.get("avatars");
+                        c.otherAvatar = avatars != null && avatars.get(other) != null
+                                ? avatars.get(other).intValue() : 0;
+                        c.lastMessage = last;
+                        c.lastTime = d.getDate("lastMessageTime",
+                                DocumentSnapshot.ServerTimestampBehavior.ESTIMATE);
+                        Map<String, Long> unread = (Map<String, Long>) d.get("unread");
+                        c.unread = unread != null && unread.get(myUid) != null ? unread.get(myUid) : 0;
+                        all.add(c);
                     }
                     Collections.sort(all, (x, y) -> {
                         Date a = x.lastTime, c2 = y.lastTime;

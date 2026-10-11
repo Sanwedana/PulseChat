@@ -1,47 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:background="@drawable/bg_petals" android:fillViewport="true">
 
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
         android:orientation="vertical" android:padding="28dp" android:gravity="center_vertical">
 
+        <com.google.android.material.imageview.ShapeableImageView android:id="@+id/ivAvatar"
+            android:layout_width="96dp" android:layout_height="96dp"
+            android:layout_gravity="center_horizontal" android:padding="3dp"
+            android:scaleType="centerCrop" android:src="@drawable/avatar_0"
+            app:shapeAppearanceOverlay="@style/CircleImage"
+            app:strokeColor="@color/lavender_mid" app:strokeWidth="3dp" />
+        <TextView android:id="@+id/tvPickAvatar" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
+            android:layout_marginTop="6dp" android:padding="6dp"
+            android:text="Tap to choose an avatar" android:textColor="@color/violet_dark" />
+
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="Create account ✨" android:textColor="@color/text_primary"
-            android:textSize="28sp" android:textStyle="bold" />
+            android:layout_marginTop="10dp" android:text="Create account ✨"
+            android:textColor="@color/text_primary" android:textSize="28sp" android:textStyle="bold" />
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_marginTop="6dp" android:layout_marginBottom="28dp"
+            android:layout_marginTop="6dp" android:layout_marginBottom="22dp"
             android:text="It takes less than a minute" android:textColor="@color/text_secondary" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:hint="Full name" app:boxCornerRadiusTopStart="16dp" app:boxCornerRadiusTopEnd="16dp"
-            app:boxCornerRadiusBottomStart="16dp" app:boxCornerRadiusBottomEnd="16dp">
+        <com.google.android.material.textfield.TextInputLayout style="@style/Widget.Material3.TextInputLayout.OutlinedBox" app:boxCornerRadiusTopStart="16dp" app:boxCornerRadiusTopEnd="16dp" app:boxCornerRadiusBottomStart="16dp" app:boxCornerRadiusBottomEnd="16dp"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Full name">
             <com.google.android.material.textfield.TextInputEditText android:id="@+id/etName"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:inputType="textPersonName" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        <com.google.android.material.textfield.TextInputLayout style="@style/Widget.Material3.TextInputLayout.OutlinedBox" app:boxCornerRadiusTopStart="16dp" app:boxCornerRadiusTopEnd="16dp" app:boxCornerRadiusBottomStart="16dp" app:boxCornerRadiusBottomEnd="16dp"
             android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_marginTop="14dp" android:hint="Email"
-            app:boxCornerRadiusTopStart="16dp" app:boxCornerRadiusTopEnd="16dp"
-            app:boxCornerRadiusBottomStart="16dp" app:boxCornerRadiusBottomEnd="16dp">
+            android:layout_marginTop="14dp" android:hint="Email">
             <com.google.android.material.textfield.TextInputEditText android:id="@+id/etEmail"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        <com.google.android.material.textfield.TextInputLayout style="@style/Widget.Material3.TextInputLayout.OutlinedBox" app:boxCornerRadiusTopStart="16dp" app:boxCornerRadiusTopEnd="16dp" app:boxCornerRadiusBottomStart="16dp" app:boxCornerRadiusBottomEnd="16dp"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:layout_marginTop="14dp" android:hint="Password (min 6 characters)"
-            app:endIconMode="password_toggle" app:boxCornerRadiusTopStart="16dp"
-            app:boxCornerRadiusTopEnd="16dp" app:boxCornerRadiusBottomStart="16dp"
-            app:boxCornerRadiusBottomEnd="16dp">
+            app:endIconMode="password_toggle">
             <com.google.android.material.textfield.TextInputEditText android:id="@+id/etPassword"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:inputType="textPassword" />
@@ -58,6 +59,6 @@
         <TextView android:id="@+id/tvLogin" android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:layout_gravity="center"
             android:layout_marginTop="22dp" android:padding="8dp"
-            android:text="Already have an account? Log in" android:textColor="@color/violet" />
+            android:text="Already have an account? Log in" android:textColor="@color/violet_dark" />
     </LinearLayout>
 </ScrollView>

@@ -45,6 +45,7 @@ public class UsersFragment extends Fragment {
             Intent i = new Intent(requireContext(), ChatActivity.class);
             i.putExtra("otherUid", user.uid);
             i.putExtra("otherName", user.name);
+            i.putExtra("otherAvatar", user.avatarId);
             startActivity(i);
         });
         b.rv.setLayoutManager(new LinearLayoutManager(requireContext()));

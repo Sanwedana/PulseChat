@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="wrap_content"
     android:orientation="vertical" android:paddingHorizontal="12dp" android:paddingVertical="3dp">
 
@@ -14,8 +14,7 @@
         android:layout_height="wrap_content" android:orientation="vertical"
         android:paddingHorizontal="14dp" android:paddingVertical="8dp">
         <TextView android:id="@+id/tvText" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:maxWidth="280dp"
-            android:textSize="15sp" />
+            android:layout_height="wrap_content" android:maxWidth="280dp" android:textSize="15sp" />
         <TextView android:id="@+id/tvTime" android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:layout_gravity="end"
             android:layout_marginTop="2dp" android:textSize="10sp" />

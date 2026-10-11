@@ -36,6 +36,7 @@ public class ChatActivity extends AppCompatActivity {
     private ActivityChatBinding b;
     private FirebaseFirestore db;
     private String myUid, myName, otherUid, otherName, chatId;
+    private int myAvatar = 0, otherAvatar = 0;
     private DocumentReference chatRef;
     private MessageAdapter adapter;
     private LinearLayoutManager lm;
@@ -52,6 +53,7 @@ public class ChatActivity extends AppCompatActivity {
         FirebaseUser me = FirebaseAuth.getInstance().getCurrentUser();
         otherUid = getIntent().getStringExtra("otherUid");
         otherName = getIntent().getStringExtra("otherName");
+        otherAvatar = getIntent().getIntExtra("otherAvatar", 0);
         if (me == null || otherUid == null) { finish(); return; }
 
         myUid = me.getUid();
@@ -60,8 +62,13 @@ public class ChatActivity extends AppCompatActivity {
         chatId = Utils.chatId(myUid, otherUid);
         chatRef = db.collection("chats").document(chatId);
 
+        db.collection("users").document(myUid).get().addOnSuccessListener(d -> {
+            Long a = d.getLong("avatarId");
+            if (a != null) myAvatar = a.intValue();
+        });
+
         b.tvName.setText(otherName);
-        b.tvAvatar.setText(Utils.initial(otherName));
+        b.ivAvatar.setImageResource(Utils.avatarRes(otherAvatar));
         b.btnBack.setOnClickListener(v -> finish());
 
         adapter = new MessageAdapter(myUid);
@@ -95,21 +102,20 @@ public class ChatActivity extends AppCompatActivity {
                 .addSnapshotListener((snap, e) -> {
                     b.progress.setVisibility(View.GONE);
                     if (e != null) {
+                        loadingMore = false;
                         Snackbar.make(b.getRoot(), "Could not load messages: " + e.getMessage(),
                                 Snackbar.LENGTH_LONG).show();
                         return;
                     }
                     List<Message> list = new ArrayList<>();
-                    if (snap != null) {
-                        for (DocumentSnapshot d : snap.getDocuments()) {
-                            Message m = d.toObject(Message.class,
-                                    DocumentSnapshot.ServerTimestampBehavior.ESTIMATE);
-                            if (m != null) list.add(m);
-                        }
+                    for (DocumentSnapshot d : snap.getDocuments()) {
+                        Message m = d.toObject(Message.class,
+                                DocumentSnapshot.ServerTimestampBehavior.ESTIMATE);
+                        if (m != null) list.add(m);
                     }
                     adapter.submit(list);
                     b.tvEmpty.setVisibility(list.isEmpty() ? View.VISIBLE : View.GONE);
-                    b.tvBanner.setVisibility(snap != null && snap.getMetadata().isFromCache() && !Utils.isOnline(this)
+                    b.tvBanner.setVisibility(snap.getMetadata().isFromCache() && !Utils.isOnline(this)
                             ? View.VISIBLE : View.GONE);
 
                     if (!loadingMore && !list.isEmpty()) b.rv.scrollToPosition(0);
@@ -148,12 +154,17 @@ public class ChatActivity extends AppCompatActivity {
         names.put(myUid, myName);
         names.put(otherUid, otherName);
 
+        Map<String, Integer> avatars = new HashMap<>();
+        avatars.put(myUid, myAvatar);
+        avatars.put(otherUid, otherAvatar);
+
         Map<String, Object> unread = new HashMap<>();
         unread.put(otherUid, FieldValue.increment(1));
 
         Map<String, Object> chat = new HashMap<>();
         chat.put("participants", Arrays.asList(myUid, otherUid));
         chat.put("names", names);
+        chat.put("avatars", avatars);
         chat.put("lastMessage", text);
         chat.put("lastSenderId", myUid);
         chat.put("lastMessageTime", FieldValue.serverTimestamp());

@@ -21,12 +21,20 @@ import java.util.Map;
 public class RegisterActivity extends AppCompatActivity {
 
     private ActivityRegisterBinding b;
+    private int avatarId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         b = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(b.getRoot());
+
+        View.OnClickListener pick = v -> AvatarPicker.show(this, id -> {
+            avatarId = id;
+            b.ivAvatar.setImageResource(Utils.avatarRes(id));
+        });
+        b.ivAvatar.setOnClickListener(pick);
+        b.tvPickAvatar.setOnClickListener(pick);
 
         b.tvLogin.setOnClickListener(v -> finish());
         b.btnRegister.setOnClickListener(v -> register());
@@ -58,7 +66,8 @@ public class RegisterActivity extends AppCompatActivity {
                                 profile.put("name", name);
                                 profile.put("nameLower", name.toLowerCase());
                                 profile.put("email", email);
-                                profile.put("status", "Hey there! I'm using PulseChat");
+                                profile.put("status", "Hey there! I'm using PulseChat 🌸");
+                                profile.put("avatarId", avatarId);
                                 profile.put("createdAt", FieldValue.serverTimestamp());
 
                                 FirebaseFirestore.getInstance().collection("users")

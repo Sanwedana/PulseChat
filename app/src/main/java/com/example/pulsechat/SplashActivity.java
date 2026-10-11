@@ -1,5 +1,6 @@
 package com.example.pulsechat;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -29,7 +30,15 @@ public class SplashActivity extends AppCompatActivity {
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             boolean loggedIn = FirebaseAuth.getInstance().getCurrentUser() != null;
-            startActivity(new Intent(this, loggedIn ? MainActivity.class : LoginActivity.class));
+            boolean seenWelcome = getSharedPreferences("pulse", Context.MODE_PRIVATE)
+                    .getBoolean("seen_welcome", false);
+
+            Class<?> next;
+            if (loggedIn) next = MainActivity.class;
+            else if (!seenWelcome) next = WelcomeActivity.class;
+            else next = LoginActivity.class;
+
+            startActivity(new Intent(this, next));
             finish();
         }, 1800);
     }

@@ -7,5 +7,23 @@
         <item name="android:windowBackground">@color/bg</item>
         <item name="android:statusBarColor">@color/bg</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="bottomNavigationStyle">@style/Widget.Sakura.BottomNav</item>
+    </style>
+
+    <style name="Widget.Sakura.BottomNav" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">@color/white</item>
+        <item name="itemIconTint">@color/nav_item</item>
+        <item name="itemTextColor">@color/nav_item</item>
+        <item name="itemActiveIndicatorStyle">@style/Sakura.NavIndicator</item>
+        <item name="elevation">10dp</item>
+    </style>
+
+    <style name="Sakura.NavIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/lavender_mid</item>
+    </style>
+
+    <style name="CircleImage">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
     </style>
 </resources>

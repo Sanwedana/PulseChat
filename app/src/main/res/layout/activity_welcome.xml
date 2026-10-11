@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/bg_petals" android:gravity="center"
+    android:orientation="vertical" android:padding="32dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="150dp" android:layout_height="150dp"
+        android:padding="3dp" android:scaleType="centerCrop"
+        android:src="@drawable/avatar_0"
+        app:shapeAppearanceOverlay="@style/CircleImage"
+        app:strokeColor="@color/lavender_mid" app:strokeWidth="4dp" />
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginTop="28dp" android:text="Welcome to PulseChat 🌸"
+        android:textColor="@color/text_primary" android:textSize="26sp" android:textStyle="bold" />
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" android:gravity="center"
+        android:text="Chat with friends in real time,\nwrapped in a little sakura magic."
+        android:textColor="@color/text_secondary" android:textSize="15sp" />
+
+    <com.google.android.material.button.MaterialButton android:id="@+id/btnStart"
+        android:layout_width="match_parent" android:layout_height="56dp"
+        android:layout_marginTop="40dp" android:text="Get started" app:cornerRadius="28dp" />
+</LinearLayout>

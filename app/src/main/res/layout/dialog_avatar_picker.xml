@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:scrollbars="none">
+    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:padding="16dp">
+        <com.google.android.material.imageview.ShapeableImageView android:id="@+id/av0"
+            android:layout_width="68dp" android:layout_height="68dp" android:layout_marginEnd="12dp"
+            android:src="@drawable/avatar_0" app:shapeAppearanceOverlay="@style/CircleImage" app:strokeColor="@color/lavender_mid" app:strokeWidth="2dp" android:scaleType="centerCrop" android:padding="2dp" />
+        <com.google.android.material.imageview.ShapeableImageView android:id="@+id/av1"
+            android:layout_width="68dp" android:layout_height="68dp" android:layout_marginEnd="12dp"
+            android:src="@drawable/avatar_1" app:shapeAppearanceOverlay="@style/CircleImage" app:strokeColor="@color/lavender_mid" app:strokeWidth="2dp" android:scaleType="centerCrop" android:padding="2dp" />
+        <com.google.android.material.imageview.ShapeableImageView android:id="@+id/av2"
+            android:layout_width="68dp" android:layout_height="68dp" android:layout_marginEnd="12dp"
+            android:src="@drawable/avatar_2" app:shapeAppearanceOverlay="@style/CircleImage" app:strokeColor="@color/lavender_mid" app:strokeWidth="2dp" android:scaleType="centerCrop" android:padding="2dp" />
+        <com.google.android.material.imageview.ShapeableImageView android:id="@+id/av3"
+            android:layout_width="68dp" android:layout_height="68dp" android:layout_marginEnd="12dp"
+            android:src="@drawable/avatar_3" app:shapeAppearanceOverlay="@style/CircleImage" app:strokeColor="@color/lavender_mid" app:strokeWidth="2dp" android:scaleType="centerCrop" android:padding="2dp" />
+        <com.google.android.material.imageview.ShapeableImageView android:id="@+id/av4"
+            android:layout_width="68dp" android:layout_height="68dp"
+            android:src="@drawable/sakura_avatar" app:shapeAppearanceOverlay="@style/CircleImage" app:strokeColor="@color/lavender_mid" app:strokeWidth="2dp" android:scaleType="centerCrop" android:padding="2dp" />
+    </LinearLayout>
+</HorizontalScrollView>

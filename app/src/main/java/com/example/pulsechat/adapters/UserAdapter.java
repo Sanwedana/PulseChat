@@ -36,7 +36,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
     @Override
     public void onBindViewHolder(@NonNull VH h, int position) {
         UserModel u = items.get(position);
-        h.b.tvAvatar.setText(Utils.initial(u.name));
+        h.b.ivAvatar.setImageResource(Utils.avatarRes(u.avatarId));
         h.b.tvName.setText(u.name);
         h.b.tvStatus.setText(u.status);
         h.itemView.setOnClickListener(v -> listener.onClick(u));

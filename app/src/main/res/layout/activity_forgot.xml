@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical" android:padding="28dp" android:gravity="center_vertical">
+    android:background="@drawable/bg_petals" android:orientation="vertical"
+    android:padding="28dp" android:gravity="center_vertical">
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:text="Reset password 🔑" android:textColor="@color/text_primary"
@@ -11,11 +11,8 @@
         android:layout_marginTop="6dp" android:layout_marginBottom="28dp"
         android:text="We'll email you a reset link" android:textColor="@color/text_secondary" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:hint="Email" app:boxCornerRadiusTopStart="16dp" app:boxCornerRadiusTopEnd="16dp"
-        app:boxCornerRadiusBottomStart="16dp" app:boxCornerRadiusBottomEnd="16dp">
+    <com.google.android.material.textfield.TextInputLayout style="@style/Widget.Material3.TextInputLayout.OutlinedBox" app:boxCornerRadiusTopStart="16dp" app:boxCornerRadiusTopEnd="16dp" app:boxCornerRadiusBottomStart="16dp" app:boxCornerRadiusBottomEnd="16dp"
+        android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Email">
         <com.google.android.material.textfield.TextInputEditText android:id="@+id/etEmail"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:inputType="textEmailAddress" />
@@ -28,5 +25,5 @@
     <TextView android:id="@+id/tvBack" android:layout_width="wrap_content"
         android:layout_height="wrap_content" android:layout_gravity="center"
         android:layout_marginTop="22dp" android:padding="8dp"
-        android:text="Back to login" android:textColor="@color/violet" />
+        android:text="Back to login" android:textColor="@color/violet_dark" />
 </LinearLayout>

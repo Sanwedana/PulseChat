@@ -1,6 +1,5 @@
 package com.example.pulsechat.adapters;
 
-import android.graphics.Color;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +17,7 @@ import com.example.pulsechat.models.Message;
 import java.util.ArrayList;
 import java.util.List;
 
+/** The list is newest-first and the RecyclerView uses reverseLayout, so index 0 is the bottom. */
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.VH> {
 
     private final List<Message> items = new ArrayList<>();
@@ -48,8 +48,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.VH> {
         lp.gravity = mine ? Gravity.END : Gravity.START;
         h.b.bubble.setLayoutParams(lp);
         h.b.bubble.setBackgroundResource(mine ? R.drawable.bg_bubble_sent : R.drawable.bg_bubble_received);
-        h.b.tvText.setTextColor(mine ? Color.WHITE : 0xFF1F1B2E);
-        h.b.tvTime.setTextColor(mine ? 0xCCFFFFFF : 0xFF6F6A87);
+        h.b.tvText.setTextColor(0xFF3A2430);
+        h.b.tvTime.setTextColor(mine ? 0xFF9A6B80 : 0xFF8A6B79);
 
         boolean showDate = position == items.size() - 1
                 || !Utils.sameDay(m.timestamp, items.get(position + 1).timestamp);

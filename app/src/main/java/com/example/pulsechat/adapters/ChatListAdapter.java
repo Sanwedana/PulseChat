@@ -37,7 +37,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.VH> {
     @Override
     public void onBindViewHolder(@NonNull VH h, int position) {
         ChatItem c = items.get(position);
-        h.b.tvAvatar.setText(Utils.initial(c.otherName));
+        h.b.ivAvatar.setImageResource(Utils.avatarRes(c.otherAvatar));
         h.b.tvName.setText(c.otherName);
         h.b.tvLast.setText(c.lastMessage);
         h.b.tvTime.setText(Utils.listTime(c.lastTime));

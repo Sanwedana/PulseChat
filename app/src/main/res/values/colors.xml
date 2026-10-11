@@ -1,11 +1,12 @@
 <resources>
-    <color name="violet">#6C4CF1</color>
-    <color name="violet_dark">#4F36C4</color>
-    <color name="lavender">#EFEAFE</color>
-    <color name="lavender_mid">#D9CFFB</color>
-    <color name="bg">#FAF8FF</color>
-    <color name="text_primary">#1F1B2E</color>
-    <color name="text_secondary">#6F6A87</color>
+    <color name="violet">#FF6FA5</color>
+    <color name="violet_dark">#E5487F</color>
+    <color name="lavender">#FFE6EF</color>
+    <color name="lavender_mid">#FFC7DA</color>
+    <color name="bg">#FFF7FA</color>
+    <color name="text_primary">#3A2430</color>
+    <color name="text_secondary">#8A6B79</color>
     <color name="white">#FFFFFF</color>
-    <color name="badge">#FF5C8A</color>
+    <color name="badge">#FF4D8D</color>
+    <color name="cream">#FFF6D9</color>
 </resources>

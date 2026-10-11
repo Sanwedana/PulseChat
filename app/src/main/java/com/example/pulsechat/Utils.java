@@ -2,9 +2,7 @@ package com.example.pulsechat;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.net.Network;
 import android.net.NetworkCapabilities;
-import android.net.NetworkInfo;
 import android.text.format.DateUtils;
 
 import java.text.SimpleDateFormat;
@@ -14,6 +12,16 @@ import java.util.Locale;
 
 public class Utils {
 
+    private static final int[] AVATARS = {
+            R.drawable.avatar_0, R.drawable.avatar_1, R.drawable.avatar_2,
+            R.drawable.avatar_3, R.drawable.sakura_avatar
+    };
+
+    public static int avatarRes(int id) {
+        return (id < 0 || id >= AVATARS.length) ? AVATARS[0] : AVATARS[id];
+    }
+
+    /** Same two users always produce the same chat id. */
     public static String chatId(String a, String b) {
         return a.compareTo(b) < 0 ? a + "_" + b : b + "_" + a;
     }
@@ -45,35 +53,10 @@ public class Utils {
                 && x.get(Calendar.DAY_OF_YEAR) == y.get(Calendar.DAY_OF_YEAR);
     }
 
-    public static String initial(String name) {
-        return (name == null || name.trim().isEmpty()) ? "?" : name.trim().substring(0, 1).toUpperCase();
-    }
-
     public static boolean isOnline(Context c) {
-        if (c == null) return true;
-        try {
-            ConnectivityManager cm = (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);
-            if (cm == null) return true;
-
-            Network activeNetwork = cm.getActiveNetwork();
-            if (activeNetwork != null) {
-                NetworkCapabilities caps = cm.getNetworkCapabilities(activeNetwork);
-                if (caps != null) {
-                    if (caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) ||
-                        caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)) {
-                        return true;
-                    }
-                }
-            }
-
-            @SuppressWarnings("deprecation")
-            NetworkInfo ni = cm.getActiveNetworkInfo();
-            if (ni != null && ni.isConnected()) {
-                return true;
-            }
-        } catch (Exception ignored) {
-            return true;
-        }
-        return false;
+        ConnectivityManager cm = (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (cm == null) return false;
+        NetworkCapabilities caps = cm.getNetworkCapabilities(cm.getActiveNetwork());
+        return caps != null && caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
     }
 }
