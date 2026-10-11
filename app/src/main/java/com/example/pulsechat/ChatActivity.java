@@ -1,7 +1,12 @@
 package com.example.pulsechat;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.pulsechat.adapters.MessageAdapter;
 import com.example.pulsechat.databinding.ActivityChatBinding;
 import com.example.pulsechat.models.Message;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,10 +34,19 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class ChatActivity extends AppCompatActivity {
 
     private static final int PAGE = 30;
+
+    private static final String[] EMOJIS = {
+            "😀","😁","😂","🤣","😊","😍","🥰","😘","😎","🤩","🥳","😇",
+            "🙂","😉","😋","😜","🤗","🤔","😴","😭","😢","😡","😱","🥺",
+            "👍","👎","👏","🙌","🙏","💪","👋","🤝","✌️","🤞","👌","🫶",
+            "❤️","💖","💕","💜","💙","💚","💛","🧡","🔥","✨","🎉","🎂",
+            "🌈","⭐","☀️","🌙","🍕","🍔","🍟","🍦","☕","🎮","🎵","📚"
+    };
 
     private ActivityChatBinding b;
     private FirebaseFirestore db;
@@ -91,6 +106,27 @@ public class ChatActivity extends AppCompatActivity {
         });
 
         b.btnSend.setOnClickListener(v -> send());
+
+        // ---- emoji panel ----
+        b.gridEmoji.setAdapter(new ArrayAdapter<>(this, R.layout.item_emoji, EMOJIS));
+        b.gridEmoji.setOnItemClickListener((parent, view, pos, id) -> {
+            int at = Math.max(b.etMessage.getSelectionStart(), 0);
+            b.etMessage.getText().insert(at, EMOJIS[pos]);
+        });
+        b.btnEmoji.setOnClickListener(v -> {
+            if (b.gridEmoji.getVisibility() == View.VISIBLE) {
+                b.gridEmoji.setVisibility(View.GONE);
+            } else {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(b.etMessage.getWindowToken(), 0);
+                b.gridEmoji.setVisibility(View.VISIBLE);
+            }
+        });
+        b.etMessage.setOnClickListener(v -> b.gridEmoji.setVisibility(View.GONE));
+
+        // ---- calls ----
+        b.btnCall.setOnClickListener(v -> startCall(false));
+        b.btnVideo.setOnClickListener(v -> startCall(true));
         listen();
     }
 
@@ -136,11 +172,42 @@ public class ChatActivity extends AppCompatActivity {
             Snackbar.make(b.getRoot(), "Message too long (max 2000 characters)", Snackbar.LENGTH_SHORT).show();
             return;
         }
+        b.etMessage.setText("");
+        sendText(text);
+    }
+
+    /**
+     * Calls use a free Jitsi Meet room. We create a random room name, post the link in the chat
+     * so the other person can tap it, and open it for ourselves.
+     * Limitation: there is no ringing/push notification; the other person must open the chat.
+     */
+    private void startCall(boolean video) {
+        if (!Utils.isOnline(this)) {
+            Snackbar.make(b.getRoot(), "You need an internet connection to start a call", Snackbar.LENGTH_LONG).show();
+            return;
+        }
+        new MaterialAlertDialogBuilder(this)
+                .setTitle(video ? "Start video call?" : "Start voice call?")
+                .setMessage("A join link will be sent to " + otherName + " in this chat.")
+                .setPositiveButton("Call", (d, w) -> {
+                    String room = "PulseChat-" + UUID.randomUUID().toString().replace("-", "").substring(0, 16);
+                    String url = "https://meet.jit.si/" + room + (video ? "" : "#config.startWithVideoMuted=true");
+                    sendText((video ? "📹 Video call" : "📞 Voice call") + " - tap to join:\n" + url);
+                    try {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                    } catch (Exception e) {
+                        Snackbar.make(b.getRoot(), "Could not open the call link", Snackbar.LENGTH_LONG).show();
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void sendText(String text) {
         if (!Utils.isOnline(this)) {
             Snackbar.make(b.getRoot(), "You're offline. The message will be sent when you reconnect.",
                     Snackbar.LENGTH_LONG).show();
         }
-        b.etMessage.setText("");
 
         WriteBatch batch = db.batch();
 

@@ -1,5 +1,6 @@
 package com.example.pulsechat.adapters;
 
+import android.text.util.Linkify;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.VH> {
         boolean mine = myUid.equals(m.senderId);
 
         h.b.tvText.setText(m.text);
+        Linkify.addLinks(h.b.tvText, Linkify.WEB_URLS);
+        h.b.tvText.setLinkTextColor(0xFFE5487F);
         h.b.tvTime.setText(Utils.time(m.timestamp));
 
         LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) h.b.bubble.getLayoutParams();

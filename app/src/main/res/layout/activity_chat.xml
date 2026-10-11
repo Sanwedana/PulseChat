@@ -16,6 +16,14 @@
             android:layout_height="wrap_content" android:layout_weight="1"
             android:layout_marginStart="12dp" android:textColor="@color/violet_dark"
             android:textSize="18sp" android:textStyle="bold" android:maxLines="1" />
+        <ImageButton android:id="@+id/btnCall" android:layout_width="44dp"
+            android:layout_height="44dp" android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Voice call" android:src="@drawable/ic_call"
+            android:tint="@color/violet_dark" />
+        <ImageButton android:id="@+id/btnVideo" android:layout_width="44dp"
+            android:layout_height="44dp" android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Video call" android:src="@drawable/ic_videocam"
+            android:tint="@color/violet_dark" />
     </LinearLayout>
 
     <TextView android:id="@+id/tvBanner" android:layout_width="match_parent"
@@ -35,22 +43,30 @@
         <TextView android:id="@+id/tvEmpty" android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:layout_gravity="center"
             android:gravity="center" android:padding="32dp" android:visibility="gone"
-            android:text="🌸\nNo messages yet\nSay hello!" android:textColor="@color/text_secondary"
+            android:text="No messages yet\nSay hello! 👋" android:textColor="@color/text_secondary"
             android:textSize="16sp" />
     </FrameLayout>
 
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
         android:layout_margin="10dp" android:background="@drawable/bg_header_pill"
         android:gravity="center_vertical" android:orientation="horizontal" android:padding="6dp">
+        <ImageButton android:id="@+id/btnEmoji" android:layout_width="44dp"
+            android:layout_height="44dp" android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Emojis" android:src="@drawable/ic_emoji"
+            android:tint="@color/violet" />
         <EditText android:id="@+id/etMessage" android:layout_width="0dp"
             android:layout_height="wrap_content" android:layout_weight="1"
             android:background="@android:color/transparent" android:hint="Type a message…"
             android:inputType="textCapSentences|textMultiLine" android:maxLines="4"
-            android:minHeight="44dp" android:paddingHorizontal="14dp"
+            android:minHeight="44dp" android:paddingHorizontal="8dp"
             android:textColor="@color/text_primary" android:textColorHint="@color/text_secondary" />
         <ImageButton android:id="@+id/btnSend" android:layout_width="44dp"
             android:layout_height="44dp" android:layout_marginStart="6dp"
             android:background="@drawable/bg_avatar" android:contentDescription="Send"
             android:src="@drawable/ic_send" android:tint="@color/white" />
     </LinearLayout>
+
+    <GridView android:id="@+id/gridEmoji" android:layout_width="match_parent"
+        android:layout_height="220dp" android:background="@color/white"
+        android:numColumns="7" android:padding="8dp" android:visibility="gone" />
 </LinearLayout>
